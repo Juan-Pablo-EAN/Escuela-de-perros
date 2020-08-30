@@ -1,19 +1,3 @@
-/*public class Principal {
-	final static int numero = 0;
-	Perro [] perros = new Perro[numero];
-	static int codigo;
-	static String nombreP;
-	static String raza;
-	static String localidad;
-	static int cedula;
-	static String nombreD;
-	
-	public static void main(String args[]) {
-		int opcion = 0;
-		
-		opcion = Integer.parseInt(JOpcionPane.showInputDialog(null, ""));
-	}
-}*/
 package paquete;
 
 import javax.swing.ImageIcon;
@@ -34,12 +18,8 @@ public class Principal {
     static int cedula1 = 0;
     static String nombre1 = "";
     static int cedula2 = 0;
+    static String raz;
 
-    /*
-	 * static int cantidadC = 0; static int cantidadD = 0; static int cantidadDo =
-	 * 0; static int cantidadO = 0; static int cantidadA = 0; static int cantidadJ =
-	 * 0; static int cantidadCa = 0; static int cantidadDom = 0;
-     */
     public static void main(String[] args) {
         int i = 0;
         int eleccion = 0;
@@ -50,7 +30,7 @@ public class Principal {
             eleccion = Integer.parseInt((String) JOptionPane.showInputDialog(null,
                     "Menu de Opciones\n\n" + "1. Ingresar un nuevo perro\n"
                     + "2. Mostrar los datos de los perros\n"
-                    + "3. Eliminar un perro\n" //averiguar como eliminar un objeto
+                    + "3. Eliminar un perro\n"
                     + "4. Mostrar los nombres de los perros de una persona\n"
                     + "5. Mostrar nombre y cantidad de perros según la raza\n"
                     + "6. Mostrar nombre y cantidad de perros según la localidad\n"
@@ -126,15 +106,15 @@ public class Principal {
 
                 }
             } else if (eleccion == 2) {
-                atributos();
+                codigo();
             } else if (eleccion == 3) {
-                //totales();
+                eliminar();
             } else if (eleccion == 4) {
-                propietario();
+                atributos();
             } else if (eleccion == 5) {
-                //cambiar();
+                raza();
             } else if (eleccion == 6) {
-
+                localidad();
             } else if (eleccion == 7) {
                 System.exit(0);
             } else {
@@ -158,18 +138,136 @@ public class Principal {
         indice++;
     }
 
-    public static void propietario() {
-        int cedul2 = Integer.parseInt(JOptionPane.showInputDialog(null, "Cedula del dueño:"));
-        int cedul = 0;
-        for (int j = 0; j < perros.length; j++) {
-            cedul = perros[j].getCedula();
-            if (cedul2 == cedul) {
-                String nomDog = perros[j].getNombreP();
-                String nomDu = perros[j].getNombreD();
-                JOptionPane.showMessageDialog(null, "Los perros de " + nomDu + " son: " + nomDog);
-            } else if (cedul2 != cedul) {
-                JOptionPane.showMessageDialog(null, "Cedula incorrecta");
+    public static void eliminar() {
+        int codnull = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el código del perro a eliminar"));
+        for (int k = 0; k <= perros.length; k++) {
+            int codi = perros[k].getCodigo();
+            if (codnull == codi) {
+                perros[k].remove();
             }
+        }
+    }
+
+    public static void codigo() {
+        int cod = Integer.parseInt(JOptionPane.showInputDialog("Escribe el código del perro"));
+        int j = 0;
+        for (j = 0; j <= perros.length; j++) {
+            int codigo = perros[j].getCodigo();
+            if (cod == codigo) {
+                JOptionPane.showMessageDialog(null, "Nombre: " + perros[j].getNombreP() + "\n"
+                        + "Raza: " + perros[j].getRaza() + "\n"
+                        + "Localidad: " + perros[j].getLocalidad() + "\n"
+                        + "Dueño: " + perros[j].getNombreD() + "\n"
+                        + "Cedula del dueño: " + perros[j].getCedula() + "\n");
+            }
+            return;
+        }
+    }
+
+    public static void raza() {
+        String raza2 = "";
+        int elec = Integer.parseInt(JOptionPane.showInputDialog(null,
+                "Escoge la raza\n" + "(Escribe el número que corresponda)\n"
+                + "1. Pitbul\n"
+                + "2. Labrador\n"
+                + "3. Golden Retriber\n"
+                + "4. Chihuahua\n"
+                + "5. Pastor aleman\n"
+                + "6. Beagle\n"
+                + "7. Poodle"));
+        int r = 0;
+        switch (elec) {
+            case 1:
+                raz = "Pitbul";
+                break;
+            case 2:
+                raz = "Labrador";
+                break;
+            case 3:
+                raz = "Golden Retriber";
+                break;
+            case 4:
+                raz = "Pastor aleman";
+                break;
+            case 5:
+                raz = "Pitbul";
+                break;
+            case 6:
+                raz = "Beagle";
+                break;
+            case 7:
+                raz = "Poodle";
+                break;
+
+        }
+        while (r <= perros.length) {
+            raza2 = perros[r].getRaza();
+            if (raz.equals(raza2)) {
+                JOptionPane.showMessageDialog(null, "Raza " + perros[r].getRaza() + ":\n\n"
+                        + perros[r].getNombreP());
+            } else if (raz != raza2) {
+                JOptionPane.showMessageDialog(null, "No hay perros con la raza que escogiste");
+            }
+            r++;
+            return;
+        }
+    }
+
+    public static void localidad() {
+        String local = "";
+        int loc = Integer.parseInt(JOptionPane.showInputDialog("Escoge la localidad del perro" + "\n"
+                + "(Escribe el número que corresponda)\n\n"
+                + "1. Usaquen\n"
+                + "2. Chapinero\n"
+                + "3. Santa Fe\n"
+                + "4. Suba\n"
+                + "5. Engativa\n"
+                + "6. Teusaquillo\n"
+                + "7. Barrios Unidos\n"));
+
+        switch (loc) {
+            case 1:
+                local = "Usaquen";
+                break;
+            case 2:
+                local = "Chapinero";
+                break;
+
+            case 3:
+                local = "Santa Fe ";
+                break;
+
+            case 4:
+                local = "Suba";
+                break;
+
+            case 5:
+                local = "Engativa";
+                break;
+
+            case 6:
+                local = "Teusaquillo";
+                break;
+
+            case 7:
+                local = "Barrios Unidos";
+                break;
+
+            default:
+                JOptionPane.showMessageDialog(null, "El numero ingresado no corresponde a ninguna localidad. ");
+                break;
+
+        }
+        int t = 0;
+        while (t <= perros.length) {
+            String lo = perros[t].getLocalidad();
+            if(lo.equals(local)){
+                JOptionPane.showMessageDialog(null, "Localidad " + lo + "\n\n"
+                        + perros[t].getNombreP() + "\n"
+                        + "Cantidad: " + t + " perros");
+            }
+            t++;
+            return;
         }
     }
 
@@ -178,41 +276,4 @@ public class Principal {
             JOptionPane.showMessageDialog(null, perros[i]);
         }
     }
-
-    /* public static void cuantos() {
-        if ("Jefe".equals(posicion)) {
-            cantidadJ++;
-        } else if ("Ayudante".equals(posicion)) {
-            cantidadA++;
-        } else if ("Cajero".equals(posicion)) {
-            cantidadCa++;
-        } else if ("Domiciliario".equals(posicion)) {
-            cantidadDom++;
-        }
-    }
-
-    public static void posiciones() {
-        JOptionPane.showMessageDialog(null, "Empleados jefes: " + cantidadJ + "\n" + "Empleados ayudantes: " + cantidadA
-                + "\n" + "Empleados cajeros: " + cantidadCa + "\n" + "Empleados domiciliarios: " + cantidadDom + "\n");
-    }
-
-    public static void contador() {
-        if ("Caja".equals(departamento)) {
-            cantidadC += salario;
-        } else if ("Distribución".equals(departamento)) {
-            cantidadD += salario;
-        } else if ("Domicilios".equals(departamento)) {
-            cantidadDo += salario;
-        } else if ("Oficina".equals(departamento)) {
-            cantidadO += salario;
-        }
-    }
-
-    public static void totales() {
-        JOptionPane.showMessageDialog(null,
-                "Salario total en Caja es: $" + cantidadC + "\n" + "Salario total en Distribución es: $" + cantidadD
-                + "\n" + "Salario total en Domicilios es: $" + cantidadDo + "\n"
-                + "Salario total en Oficina es: $" + cantidadO + "\n");
-    }
-     */
 }
