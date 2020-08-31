@@ -1,11 +1,14 @@
 package paquete;
 
 import javax.swing.JOptionPane;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Principal {
 
     final static int num = 20;
     static Perro[] perros = new Perro[num];
+    static Perro[] perrosTemporal = new Perro[num];
     static int indice = 0;
     static int n = 0;
     static String nombreP = "";
@@ -140,7 +143,41 @@ public class Principal {
 
     public static void eliminar() {
         int codnull = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el código del perro a eliminar"));
-        //crear el metodo para eliminar el perro
+        int cont = 0;
+        
+        //copiamos la informacion a un array temporal
+        for (int j = 0; j < indice; j++) {
+            int codigo = perros[j].getCodigo();
+            
+            if (codnull != codigo) {
+                perrosTemporal[cont] = perros[j];
+                cont = cont + 1;
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Se elimino la informacion del perro: " + perros[j].getNombreP() + "\n"
+                        + "Raza: " + perros[j].getRaza() + "\n"
+                        + "Localidad: " + perros[j].getLocalidad() + "\n"
+                        + "Dueño: " + perros[j].getNombreD() + "\n"
+                        + "Cedula del dueño: " + perros[j].getCedula() + "\n");
+            }
+        }
+        
+        //vaceamos el array principal
+        for (int p = 0; p < indice; p++) {
+            perros[p] = null;
+        }
+        
+        
+        
+        int r = 0;
+        int indiceTemp = indice -1;
+        perros = new Perro[indiceTemp];
+        
+        //copiamos la informacion filtrada al array principal nuevamente
+        for (r = 0; r < indiceTemp; r++) {
+            perros[r] =  perrosTemporal[r];
+        }
+
     }
 
     public static void codigo() {
