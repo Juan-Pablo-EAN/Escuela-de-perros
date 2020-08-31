@@ -1,6 +1,5 @@
 package paquete;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Principal {
@@ -136,16 +135,12 @@ public class Principal {
         p.setNombreD(nombre1);
         perros[indice] = p;
         indice++;
+
     }
 
     public static void eliminar() {
         int codnull = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingresa el código del perro a eliminar"));
-        for (int k = 0; k <= perros.length; k++) {
-            int codi = perros[k].getCodigo();
-            if (codnull == codi) {
-                perros[k].remove();
-            }
-        }
+        //crear el metodo para eliminar el perro
     }
 
     public static void codigo() {
@@ -159,8 +154,8 @@ public class Principal {
                         + "Localidad: " + perros[j].getLocalidad() + "\n"
                         + "Dueño: " + perros[j].getNombreD() + "\n"
                         + "Cedula del dueño: " + perros[j].getCedula() + "\n");
+                return;
             }
-            return;
         }
     }
 
@@ -201,15 +196,19 @@ public class Principal {
 
         }
         while (r <= perros.length) {
-            raza2 = perros[r].getRaza();
-            if (raz.equals(raza2)) {
-                JOptionPane.showMessageDialog(null, "Raza " + perros[r].getRaza() + ":\n\n"
-                        + perros[r].getNombreP());
-            } else if (raz != raza2) {
-                JOptionPane.showMessageDialog(null, "No hay perros con la raza que escogiste");
+
+            try {
+                raza2 = perros[r].getRaza();
+                if (raz.equals(raza2)) {
+                    JOptionPane.showMessageDialog(null, "Raza " + perros[r].getRaza() + ":\n\n"
+                            + perros[r].getNombreP());
+                    return;
+                }
+                r++;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "La raza que elegiste no pertenece a la escuela");
+                return;
             }
-            r++;
-            return;
         }
     }
 
@@ -260,14 +259,17 @@ public class Principal {
         }
         int t = 0;
         while (t <= perros.length) {
-            String lo = perros[t].getLocalidad();
-            if(lo.equals(local)){
-                JOptionPane.showMessageDialog(null, "Localidad " + lo + "\n\n"
-                        + perros[t].getNombreP() + "\n"
-                        + "Cantidad: " + t + " perros");
+            try {
+                String lo = perros[t].getLocalidad();
+                if (lo.equals(local)) {
+                    JOptionPane.showMessageDialog(null, "Localidad " + lo + "\n\n"
+                            + perros[t].getNombreP() + "\n");
+                }
+                t++;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "La localidad que elegiste no pertenece a la escuela");
+                return;
             }
-            t++;
-            return;
         }
     }
 

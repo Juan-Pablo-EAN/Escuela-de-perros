@@ -79,7 +79,4 @@ public class Perro {
         return sb.toString();
     }
 
-    void remove() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
